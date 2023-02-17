@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main.views import hello_world
+
+from currency.views import contact_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello-world/', hello_world)
+    path('contact_us/list', contact_list),
 ]
