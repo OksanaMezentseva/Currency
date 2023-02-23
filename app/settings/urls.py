@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path
 
 from currency.views import contact_list
+from currency.views import list_rates
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('contact_us/list', contact_list),
+    path('rate/list/', list_rates),
 ]
