@@ -1,26 +1,38 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 from currency.models import ContactUs
 from currency.models import Rate
+from currency.forms import RateForm
 
 
 def contact_list(request):
     contacts = ContactUs.objects.all()
-    result = []
+    context = {
+        'contacts': contacts
+    }
 
-    for contact in contacts:
-        result.append(
-            f'id: {contact.id}, email_from: {contact.email_from}, subject: {contact.subject},'
-            f' message: {contact.message} <br>')
-    return HttpResponse(str(result))
+    return render(request, 'contact_list.html', context)
 
 
 def list_rates(request):
-    qs = Rate.objects.all()
-    result = []
+    rates = Rate.objects.all()
+    context = {
+        'rates': rates
+    }
 
-    for rate in qs:
-        result.append(
-            f'id: {rate.id}, buy: {rate.buy}, sell: {rate.sell},'
-            f' source: {rate.source}, created: {rate.created}, currency: {rate.currency} <br>')
-    return HttpResponse(str(result))
+    return render(request, 'rates_list.html', context)
+
+
+def rates_create(request):
+    if request.GET:
+        form = RateForm(request.GET)
+        if form.is_valid():
+            form.save()
+    else:
+        form = RateForm()
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'rates_create.html', context)
