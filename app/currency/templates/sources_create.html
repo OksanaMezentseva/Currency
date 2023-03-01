@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    CreateRates
+    CreateSources
 {% endblock title %}
 
 {% block content %}
 
-  Create Rate Form
+  Create Source Form
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
