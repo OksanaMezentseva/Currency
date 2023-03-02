@@ -5,3 +5,4 @@ flake8
 flake8-builtins
 flake8-print
 Jinja2
+django-debug-toolbar-3.8.1
