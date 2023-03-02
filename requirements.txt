@@ -4,3 +4,4 @@ ipython
 flake8
 flake8-builtins
 flake8-print
+Jinja2
