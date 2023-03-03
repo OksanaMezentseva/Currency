@@ -1,12 +1,35 @@
-from currency.models import ContactUs
-from currency.models import Rate, Source
-from currency.forms import RateForm, SourceForm
+from currency.models import Rate, Source, ContactUs
+from currency.forms import RateForm, SourceForm, ContactUsForm
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, TemplateView
 
 
 class ContactListView(ListView):
     template_name = 'contact_list.html'
+    queryset = ContactUs.objects.all()
+
+
+class ContactDetailView(DetailView):
+    template_name = 'contact_details.html'
+    queryset = ContactUs.objects.all()
+
+
+class ContactCreateView(CreateView):
+    form_class = ContactUsForm
+    template_name = 'contacts_create.html'
+    success_url = reverse_lazy('currency:contact_us-list')
+
+
+class ContactUpdateView(UpdateView):
+    form_class = ContactUsForm
+    template_name = 'contacts_update.html'
+    success_url = reverse_lazy('currency:contact_us-list')
+    queryset = ContactUs.objects.all()
+
+
+class ContactDeleteView(DeleteView):
+    template_name = 'contacts_delete.html'
+    success_url = reverse_lazy('currency:contact_us-list')
     queryset = ContactUs.objects.all()
 
 
