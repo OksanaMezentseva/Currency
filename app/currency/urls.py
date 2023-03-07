@@ -26,11 +26,13 @@ urlpatterns = [
     path('contact_us/create/', ContactCreateView.as_view(), name='contact_us-create'),
     path('contact_us/update/<int:pk>/', ContactUpdateView.as_view(), name='contact_us-update'),
     path('contact_us/delete/<int:pk>/', ContactDeleteView.as_view(), name='contact_us-delete'),
+
     path('rate/create/', RateCreateView.as_view(), name='rate-create'),
     path('rate/update/<int:pk>/', RateUpdateView.as_view(), name='rate-update'),
     path('rate/delete/<int:pk>/', RateDeleteView.as_view(), name='rate-delete'),
     path('rate/details/<int:pk>/', RateDetailView.as_view(), name='rate-details'),
     path('rate/list/', RateListView.as_view(), name='rate-list'),
+
     path('source/list/', SourceListView.as_view(), name='source-list'),
     path('source/create/', SourceCreateView.as_view(), name='source-create'),
     path('source/update/<int:pk>/', SourceUpdateView.as_view(), name='source-update'),
