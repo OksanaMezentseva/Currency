@@ -28,7 +28,6 @@ class UserActivateView(RedirectView):
         return url
 
 
-
 '''
 1. email + password + confirm password (get email)
 2. email (get email) + password + confirm
