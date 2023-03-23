@@ -47,7 +47,8 @@ EXTERNAL_APPS = [
     'import_export',
 ]
 INTERNAL_APPS = [
-    'currency'
+    'currency',
+    'account'
 ]
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + INTERNAL_APPS
 
@@ -144,12 +145,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_PORT = 587
 # EMAIL_HOST_USER = 'example@gmail.com'
 # EMAIL_HOST_PASSWORD = '*********'
+DEFAULT_FROM_EMAIL = 'support@example.com'
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 LOGOUT_REDIRECT_URL = reverse_lazy('index')
 LOGIN_URL = reverse_lazy('login')
 
+AUTH_USER_MODEL = 'account.User'
+
 if DEBUG:
     import socket  # only if you haven't already imported this
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
     INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]
+
+
+HOST = 'localhost:8000'
+HTTP_SCHEMA = 'http'
