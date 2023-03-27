@@ -19,7 +19,8 @@ class Rate(models.Model):
     )  # if field has choices - get_{field_name}_display(), get_currency_display()
     buy = models.DecimalField(max_digits=6, decimal_places=2)
     sell = models.DecimalField(max_digits=6, decimal_places=2)
-    source = models.CharField(max_length=25)
+    # source = models.CharField(max_length=25)
+    source = models.ForeignKey('currency.Source', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'Currency: {self.get_currency_display()}, Buy: {self.buy}'
@@ -31,6 +32,9 @@ class Source(models.Model):
     address = models.CharField(max_length=65, null=True)
     phone = models.CharField(max_length=65, null=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
 
 
 class RequestResponseLog(models.Model):
