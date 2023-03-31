@@ -45,6 +45,8 @@ EXTERNAL_APPS = [
     'debug_toolbar',
     'rangefilter',
     'import_export',
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
 INTERNAL_APPS = [
     'currency',
@@ -132,6 +134,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR.parent / 'static_content' / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -161,3 +167,8 @@ if DEBUG:
 
 HOST = 'localhost:8000'
 HTTP_SCHEMA = 'http'
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

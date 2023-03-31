@@ -1,9 +1,13 @@
 import uuid
 
+from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit, Row, Column
 
 User = get_user_model()
 
@@ -15,6 +19,19 @@ class UserSignUpForm(forms.ModelForm):
     class Meta:
         model = User
         fields = (
+            'email',
+            'password1',
+            'password2'
+        )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.label_class = 'col-md-3'
+        self.helper.field_class = 'col-md-6'
+        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.layout = Layout(
             'email',
             'password1',
             'password2'
@@ -59,4 +76,46 @@ class UserSignUpForm(forms.ModelForm):
             settings.DEFAULT_FROM_EMAIL,
             [self.instance.email],
             fail_silently=False,
+        )
+
+
+class LoginForm(AuthenticationForm):
+
+    class Meta:
+        model = User
+        fields = ('email', 'password')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'POST'
+        self.helper.label_class = 'col-md-3'
+        self.helper.field_class = 'col-md-6'
+        self.helper.add_input(Submit('submit', 'Login'))
+        self.helper.layout = Layout(
+            'username',
+            'password'
+        )
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'avatar')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'POST'
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-md-3'
+        self.helper.field_class = 'col-md-12'
+        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.layout = Layout(
+            Row(
+                Column('first_name'),
+                Column('last_name'),
+                css_class='form-row'
+            ),
+            'avatar',
         )
