@@ -44,7 +44,8 @@ class SourceForm(forms.ModelForm):
             'name',
             'source_url',
             'address',
-            'phone'
+            'phone',
+            'logo'
         )
 
     def __init__(self, *args, **kwargs):
@@ -59,7 +60,8 @@ class SourceForm(forms.ModelForm):
             'name',
             'source_url',
             'address',
-            'phone'
+            'phone',
+            'logo'
         )
 
 
