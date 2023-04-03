@@ -1,13 +1,14 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, RedirectView
+from django.views.generic import CreateView, RedirectView, UpdateView
 
-from account.forms import UserSignUpForm
+from account.forms import UserSignUpForm, LoginForm, UserProfileForm
 
 
 class UserSignUpView(CreateView):
     queryset = get_user_model().objects.all()
-    # queryset = User.objects.all()
     template_name = 'signup.html'
     success_url = reverse_lazy('index')
     form_class = UserSignUpForm
@@ -28,6 +29,16 @@ class UserActivateView(RedirectView):
         return url
 
 
+class ProfileView(LoginRequiredMixin, UpdateView):
+    template_name = 'registration/profile.html'
+    success_url = reverse_lazy('index')
+    model = get_user_model()
+    form_class = UserProfileForm
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
 '''
 1. email + password + confirm password (get email)
 2. email (get email) + password + confirm
@@ -42,3 +53,8 @@ Send email
 Activate
 /account/activate/<key>/
 '''
+
+
+class CustomLoginView(LoginView):
+    form_class = LoginForm
+    template_name = 'registration/login.html'

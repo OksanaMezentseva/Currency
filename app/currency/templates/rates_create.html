@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}
     CreateRates
 {% endblock title %}
@@ -9,8 +11,7 @@
   Create Rate Form
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type = "submit">Submit</button>
+    {% crispy form %}
 </form>
 
 {% endblock content %}

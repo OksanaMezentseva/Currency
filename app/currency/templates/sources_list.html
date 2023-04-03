@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
     Source
 {% endblock title %}
@@ -10,12 +12,14 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Logo</th>
             <th>Source_url</th>
         </tr>
         {% for source in object_list %}
         <tr>
              <td>{{ source.id }}</td>
              <td>{{ source.name }}</td>
+             <td><img src="{{ source.logo_url }}" width="50" height="50"></td>
              <td>{{ source.source_url }}</td>
             <td><a href="{% url 'currency:source-update' source.id %}">Update</a><br></td>
             <td><a href="{% url 'currency:source-delete' source.id %}">Delete</a><br></td>
