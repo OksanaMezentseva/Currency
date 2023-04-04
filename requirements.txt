@@ -12,4 +12,4 @@ flake8-print
 Jinja2
 boto3
 crispy-bootstrap4
-
+Celery

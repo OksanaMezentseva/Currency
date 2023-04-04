@@ -172,3 +172,9 @@ HTTP_SCHEMA = 'http'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# CELERY
+CELERY_BROKER_URL = 'amqp://localhost'
+'''
+ampq, localhost, 5672, guest, guest
+'''
