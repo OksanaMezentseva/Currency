@@ -4,8 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, TemplateView
 
-from settings import settings
-
 
 class ContactListView(ListView):
     template_name = 'contact_list.html'
@@ -28,7 +26,7 @@ class ContactCreateView(CreateView):
 
     def _send_mail(self):
         subject = 'User ContactUs'
-        recipient = settings.DEFAULT_FROM_EMAIL
+        # recipient = settings.DEFAULT_FROM_EMAIL
         message = f'''
         Request from: {self.object.name}.
         Reply to email: {self.object.email_from}.
@@ -42,13 +40,11 @@ class ContactCreateView(CreateView):
         0 - 8.59 | 9.00 - 19.00 | 19.01 23.59
            9.00  |    send      | 9.00 next day
         '''
-        from datetime import datetime, timedelta
         send_mail.apply_async(
             kwargs={'subject': subject, 'message': message},
             # countdown=20
             # eta=datetime(2023, 3, 28, 20, 49, 0)
         )
-
 
     def form_valid(self, form):
         redirect = super().form_valid(form)
