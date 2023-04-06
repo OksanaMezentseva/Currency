@@ -4,8 +4,52 @@ from currency.choices import RateCurrencyChoices
 
 from settings import settings
 
-from currency.constants import PRIVATBANK_CODE_NAME
-from currency.utils import to_2_point_decimal
+from currency.constants import PRIVATBANK_CODE_NAME, MONOBANK_CODE_NAME
+from currency.utils import to_2_point_decimal, get_currency_code
+
+
+@shared_task
+def parse_monobank():
+    from currency.models import Rate, Source
+
+    url_mono = 'https://api.monobank.ua/bank/currency'
+
+    source_mono, _ = Source.objects.get_or_create(code_name=MONOBANK_CODE_NAME,
+                                                  defaults={
+                                                      'name': 'MonoBank',
+                                                      'source_url': url_mono
+                                                  })
+
+    response = requests.get(url_mono)
+    response.raise_for_status()
+    rates = response.json()
+
+    available_currency = {
+        'USD': RateCurrencyChoices.USD,
+        'EUR': RateCurrencyChoices.EUR,
+    }
+
+    for rate in rates:
+        if get_currency_code(rate['currencyCodeB']) != 'UAH' \
+                or get_currency_code(rate['currencyCodeA']) not in available_currency:
+            continue
+
+        buy = to_2_point_decimal(rate['rateBuy'])
+        sale = to_2_point_decimal(rate['rateSell'])
+        currency = get_currency_code(rate['currencyCodeA'])
+
+        last_rate = Rate.objects.filter(
+            currency=available_currency[currency],
+            source=source_mono,
+        ).first()
+
+        if last_rate is None or last_rate.buy != buy or last_rate.sale != sale:
+            Rate.objects.create(
+                buy=buy,
+                sale=sale,
+                currency=available_currency[currency],
+                source=source_mono
+            )
 
 
 @shared_task

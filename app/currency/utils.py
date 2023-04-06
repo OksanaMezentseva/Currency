@@ -8,3 +8,8 @@ def to_2_point_decimal(value: str) -> Decimal:
     :return: 123.45
     '''
     return round(Decimal(value), 2)
+
+
+def get_currency_code(numeric_code):
+    from currency.constants import CURRENCIES
+    return CURRENCIES.get(numeric_code)

@@ -181,8 +181,12 @@ CELERY_BROKER_URL = 'amqp://localhost'
 ampq, localhost, 5672, guest, guest
 '''
 CELERY_BEAT_SCHEDULE = {
-    'debug': {
+    'parse_privatbank': {
         'task': 'currency.tasks.parse_privatbank',
+        'schedule': crontab(minute='*/15')
+    },
+    'parse_monobank': {
+        'task': 'currency.tasks.parse_monobank',
         'schedule': crontab(minute='*/15')
     }
 }
