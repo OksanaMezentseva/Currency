@@ -5,6 +5,7 @@ django-import-export
 django-storages
 django-crispy-forms
 django-debug-toolbar-3.8.1
+requests
 ipython
 flake8
 flake8-builtins
