@@ -6,4 +6,3 @@ CURRENCIES = {
     980: 'UAH',
     840: 'USD',
 }
-
