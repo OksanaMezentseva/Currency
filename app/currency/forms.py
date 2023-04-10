@@ -13,7 +13,7 @@ class RateForm(forms.ModelForm):
         model = Rate
         fields = (
             'buy',
-            'sell',
+            'sale',
             'source',
             'currency'
         )
@@ -28,7 +28,7 @@ class RateForm(forms.ModelForm):
         self.helper.add_input(Submit('submit', 'Submit'))
         self.helper.layout = Layout(
             'buy',
-            'sell',
+            'sale',
             'source',
             'currency'
         )
