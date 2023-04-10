@@ -1,11 +1,11 @@
 class BaseParserService:
     def get_rates(self) -> dict:
         # method to get currency rates from source
-        pass
+        raise NotImplementedError
 
     def get_source(self) -> dict:
         # method to get source
-        pass
+        raise NotImplementedError
 
     def save_rates(self, rates, code_name, data_source):
         # method to save currency rates into DB
