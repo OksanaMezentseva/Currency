@@ -68,6 +68,7 @@ class ContactDeleteView(DeleteView):
 class RateListView(ListView):
     template_name = 'rates_list.html'
     queryset = Rate.objects.all().select_related('source')
+    paginate_by = 10
 
 
 class RateDetailView(LoginRequiredMixin, DetailView):

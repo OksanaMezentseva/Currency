@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for rate in object_list %}
+            {% for rate in page_obj %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ rate.id }}</td>
@@ -53,5 +53,7 @@
             </tbody>
         </table>
     </div>
+
+{% include 'includes/pagination.html' %}
 
 {% endblock content %}
