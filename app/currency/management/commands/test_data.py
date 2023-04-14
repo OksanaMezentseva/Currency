@@ -9,7 +9,7 @@ class Command(BaseCommand):
     help = "Generate random test rates"
 
     def handle(self, *args, **options):
-        source, _ = Source.objects.get_or_create(code_name='1', defaults={'name': 1})
+        source, _ = Source.objects.get_or_create(code_name='1', defaults={'name': 'test_data'})
 
         for _ in range(400):
             Rate.objects.create(

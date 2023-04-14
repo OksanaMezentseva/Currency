@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% load static %}
 
 {% block title %}
@@ -8,6 +10,10 @@
 
 {% block content %}
     <a href="{% url 'currency:source-create' %}">Create</a><br>
+    <form method="get">
+        {{ filter.form|crispy }}
+        <input type="submit" />
+    </form> <br>
     <table style="width:100%">
         <tr>
             <th>ID</th>

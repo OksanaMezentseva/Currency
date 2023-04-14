@@ -12,7 +12,7 @@
             <th>Subject</th>
             <th>Message</th>
         </tr>
-        {% for contact in object_list %}
+        {% for contact in page_obj %}
         <tr>
              <td>{{ contact.id }}</td>
              <td>{{ contact.email_from }}</td>
@@ -24,4 +24,7 @@
          </tr>
         {% endfor %}
     </table>
+
+{% include 'includes/pagination.html' %}
+
 {% endblock content %}
