@@ -9,8 +9,8 @@
 {% block content %}
     <a href="{% url 'currency:rate-create' %}">Create</a><br>
     <form method="get">
-        {{ filter.form|crispy }}
-        <input type="submit" />
+        {% crispy filter.form %}
+        <input type="submit" /><br>
     </form> <br>
 
     <div class="row col-12">

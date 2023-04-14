@@ -115,6 +115,7 @@ class RateDeleteView(UserPassesTestMixin, DeleteView):
 
 
 class SourceListView(FilterView):
+    model = Source
     template_name = 'sources_list.html'
     queryset = Source.objects.all()
     filterset_class = SourceFilter
