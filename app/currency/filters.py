@@ -1,6 +1,5 @@
 import django_filters
 
-
 from currency.models import Rate
 from currency.models import Source
 from django_filters import filters

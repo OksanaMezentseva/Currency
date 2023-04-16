@@ -28,6 +28,8 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
 
     path('currency/', include('currency.urls')),
+    path('api/currency/', include('currency.api.urls')),
+
     path('account/', include('account.urls')),
 
     path('', IndexView.as_view(), name='index'),
