@@ -101,7 +101,7 @@ class LoginForm(AuthenticationForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'avatar')
+        fields = ('first_name', 'last_name', 'avatar', 'email', 'phone',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -118,4 +118,6 @@ class UserProfileForm(forms.ModelForm):
                 css_class='form-row'
             ),
             'avatar',
+            'email',
+            'phone',
         )
