@@ -1,7 +1,6 @@
 import django_filters
 
-from currency.models import Rate
-from currency.models import Source
+from currency.models import Rate, ContactUs, Source
 from django_filters import filters
 from currency.choices import RateCurrencyChoices
 
@@ -23,3 +22,17 @@ class SourceFilter(django_filters.FilterSet):
     class Meta:
         model = Source
         fields = ['name']
+
+
+class ContactUsFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_expr='icontains')
+    email_from = django_filters.CharFilter(lookup_expr='icontains')
+    subject = django_filters.CharFilter(lookup_expr='icontains')
+    message = django_filters.CharFilter(lookup_expr='icontains')
+
+    class Meta:
+        model = ContactUs
+        fields = ['name',
+                  'email_from',
+                  'subject',
+                  'message']
