@@ -6,6 +6,10 @@ django-storages
 django-crispy-forms
 django-debug-toolbar-3.8.1
 django-filter
+rest_framework
+djangorestframework-simplejwt
+drf-yasg
+
 requests
 ipython
 flake8
