@@ -15,6 +15,7 @@ def api_client():
     client = APIClient()
     yield client
 
+
 @pytest.fixture(autouse=True, scope="session")
 def load_fixtures(django_db_setup, django_db_blocker):
     with django_db_blocker.unblock():
