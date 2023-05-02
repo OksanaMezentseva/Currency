@@ -20,7 +20,7 @@ def load_fixtures(django_db_setup, django_db_blocker):
     with django_db_blocker.unblock():
         fixtures = (
             'sources.json',
-            'rates.json',
+            # 'rates.json',
         )
         for fixture in fixtures:
             call_command('loaddata', f'app/tests/fixtures/{fixture}')

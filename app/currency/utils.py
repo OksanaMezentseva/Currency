@@ -12,4 +12,4 @@ def to_2_point_decimal(value: str) -> Decimal:
 
 def get_currency_code(numeric_code):
     from currency.constants import CURRENCIES
-    return CURRENCIES.get(numeric_code)
+    return CURRENCIES.get(int(numeric_code))
