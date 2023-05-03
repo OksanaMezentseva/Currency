@@ -19,3 +19,7 @@ Jinja2
 boto3
 crispy-bootstrap4
 Celery
+pytest
+pytest-django
+pytest-cov
+pytest-mock

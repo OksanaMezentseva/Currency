@@ -1,0 +1,68 @@
+[
+  {
+    "model": "currency.rate",
+    "pk": 23,
+    "fields": {
+      "created": "2023-04-09T19:48:57.531Z",
+      "currency": 1,
+      "buy": "39.88",
+      "sale": "41.49",
+      "source": 12
+    }
+  },
+  {
+    "model": "currency.rate",
+    "pk": 24,
+    "fields": {
+      "created": "2023-04-09T19:48:57.591Z",
+      "currency": 2,
+      "buy": "36.57",
+      "sale": "37.45",
+      "source": 12
+    }
+  },
+  {
+    "model": "currency.rate",
+    "pk": 25,
+    "fields": {
+      "created": "2023-04-09T19:50:05.213Z",
+      "currency": 2,
+      "buy": "36.65",
+      "sale": "37.44",
+      "source": 13
+    }
+  },
+  {
+    "model": "currency.rate",
+    "pk": 26,
+    "fields": {
+      "created": "2023-04-09T19:50:05.304Z",
+      "currency": 1,
+      "buy": "40.00",
+      "sale": "41.10",
+      "source": 13
+    }
+  },
+  {
+    "model": "currency.rate",
+    "pk": 1629,
+    "fields": {
+      "created": "2023-04-12T17:25:21.060Z",
+      "currency": 1,
+      "buy": "32.00",
+      "sale": "34.00",
+      "source": 17
+    }
+  },
+  {
+    "model": "currency.rate",
+    "pk": 1640,
+    "fields": {
+      "created": "2023-04-12T17:25:21.607Z",
+      "currency": 2,
+      "buy": "36.00",
+      "sale": "32.00",
+      "source": 17
+    }
+  }
+]
