@@ -196,9 +196,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',  # 403
     ),
-    'DEFAULT_THROTTLE_RATES': {
-        'currency': '2/min',
-    },
+    # 'DEFAULT_THROTTLE_RATES': {
+    #     'currency': '2/min',
+    # },
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
 
@@ -227,3 +227,11 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+        "LOCATION": "127.0.0.1:11211",
+    }
+}
+

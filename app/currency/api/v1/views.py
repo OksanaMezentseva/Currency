@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
@@ -16,6 +17,10 @@ from currency.paginators import RatesPagination
 
 from currency.throttlers import AnonCurrencyThrottle
 
+from currency.choices import RateCurrencyChoices
+
+from currency import constants
+
 
 # class RateApiView(generics.ListCreateAPIView):
 #     queryset = Rate.objects.all().select_related('source')
@@ -30,7 +35,7 @@ from currency.throttlers import AnonCurrencyThrottle
 class RateViewSet(viewsets.ModelViewSet):
     queryset = Rate.objects.all()
     serializer_class = RateSerializer
-    renderer_classes = (JSONRenderer, XMLRenderer, YAMLRenderer)
+    # renderer_classes = (JSONRenderer, XMLRenderer, YAMLRenderer)
     pagination_class = RatesPagination
     permission_classes = (AllowAny,)
     filter_backends = (
@@ -39,7 +44,7 @@ class RateViewSet(viewsets.ModelViewSet):
     )
     filterset_class = RateFilter
     ordering_fields = ('id', 'created', 'buy', 'sale')
-    throttle_classes = (AnonCurrencyThrottle,)
+    # throttle_classes = (AnonCurrencyThrottle,)
 
     @action(detail=True, methods=('POST',))
     def buy(self, request, *args, **kwargs):
@@ -47,6 +52,29 @@ class RateViewSet(viewsets.ModelViewSet):
         # print(rate)  # send buy request
         sz = self.get_serializer(instance=rate)
         return Response(sz.data)
+
+    @action(detail=False, methods=('GET',))
+    def latest(self, request, *args, **kwargs):
+        latest_rates = []
+
+        cached_rates = cache.get(constants.LATEST_RATE_CACHE)
+        if cached_rates:
+            return Response(cached_rates)
+
+        for source_obj in Source.objects.all():
+            for currency in RateCurrencyChoices:
+                latest = Rate.objects.filter(
+                    source=source_obj,
+                    currency=currency) \
+                    .order_by('-created') \
+                    .first()
+
+                if latest:
+                    latest_rates.append(RateSerializer(instance=latest).data)
+
+        cache.set(constants.LATEST_RATE_CACHE, latest_rates, 60 * 60 * 24 * 7)
+
+        return Response(latest_rates)
 
 
 class SourceViewSet(viewsets.ModelViewSet):

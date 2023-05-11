@@ -6,3 +6,5 @@ CURRENCIES = {
     980: 'UAH',
     840: 'USD',
 }
+
+LATEST_RATE_CACHE = 'V1::API::currency::rates::latest'
