@@ -13,6 +13,8 @@ drf-yasg
 djangorestframework-yaml
 djangorestframework-xml
 django-environ
+django-crispy-forms
+crispy-bootstrap4
 
 #services
 gunicorn
