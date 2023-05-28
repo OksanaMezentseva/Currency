@@ -24,3 +24,5 @@ pytest-django
 pytest-cov
 pytest-mock
 pymemcache
+gunicorn
+psycopg2-binary
